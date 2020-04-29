@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<h:outputStylesheet library="css" name="file.css" />
+
+</h:head>
+
+<h:body id="body">
+	
+	<h1 id="h1">Login</h1>
+	<div id="quadro">
+		<h:form>
+			<h:panelGrid>
+				<h:outputLabel value="Usuário:" />
+				<p:inputText placeholder="Digite seu usuário"
+					value="#{LoginBean.usuarioInpt}" />
+				<h:outputLabel value="Senha" />
+				<p:password id="senha" placeholder="Digite sua senha"
+					value="#{LoginBean.senhaInpt}" />
+				<h:commandButton value="Entrar" actionListener="#{LoginBean.entrar}" />
+				<p:commandLink id="CadastroUsuario" style="margin-right:20px;"
+					action="#{LoginBean.cadastroUsuario}">
+					<h:outputText value="Cadastrar Usuário" />
+				</p:commandLink>
+				<h:outputLabel value="#{LoginBean.msg}"
+					style="color: red; font-weight: bold" />
+			</h:panelGrid>
+		</h:form>
+	</div>
+
+	<h:outputText />
+</h:body>
+</html>
