@@ -45,6 +45,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		et.commit();
 
 	}
+	
+	public void removerTelefone(long id) {
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		em.remove(id);
+		et.commit();
+	}
 
 	// Método pesquisar: Pesquisa o usuário pela chave primária (email).
 

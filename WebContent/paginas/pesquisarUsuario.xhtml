@@ -5,6 +5,8 @@
 
 <h:head>
 	<h:outputStylesheet library="css" name="file.css" />
+	<h:outputStylesheet name="primeicons/primeicons.css"
+		library="primefaces" />
 </h:head>
 <h:body>
 	<h:form>
@@ -24,35 +26,44 @@
 
 
 		<p:panel header="Lista de Usuários"
-			style="margin-bottom:10px; width: 49%">
+			style="margin-bottom:10px; width: 100%">
 			<p:dataTable var="usuario" value="#{UsuarioBean.listaUsuario}">
+
+				<p:column headerText="Detalhe" width="7%" style="text-align: center">
+					<p:commandButton icon="pi pi-search"
+						action="#{UsuarioBean.detalheUsuario}">
+						<f:setPropertyActionListener
+							target="#{UsuarioBean.emailSelecionado}" value="#{usuario.email}" />
+					</p:commandButton>
+				</p:column>
 				<p:column headerText="Nome">
 					<h:outputText value="#{usuario.nome}" />
 				</p:column>
 				<p:column headerText="Email">
 					<h:outputText value="#{usuario.email}" />
 				</p:column>
-				<p:column headerText="Editar" width="15%">
+				<p:column headerText="Editar" width="6%" style="text-align: center">
 					<p:commandButton icon="pi pi-pencil" action="#{UsuarioBean.editar}">
 						<f:setPropertyActionListener
 							target="#{UsuarioBean.emailSelecionado}" value="#{usuario.email}" />
 					</p:commandButton>
 				</p:column>
-				<p:column headerText="Remover" width="15%">
+				<p:column headerText="Remover" width="7%" style="text-align: center">
 					<p:commandButton icon="pi pi-times" update="@form"
 						action="#{UsuarioBean.remover}">
 						<f:setPropertyActionListener
 							target="#{UsuarioBean.emailSelecionado}" value="#{usuario.email}" />
-							<p:confirm header="Confirmation" message="Deseja Remover?" icon="pi pi-exclamation-triangle" />
+						<p:confirm header="Confirmation" message="Deseja Remover?"
+							icon="pi pi-exclamation-triangle" />
 					</p:commandButton>
-					
+
 					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 						<p:commandButton value="Yes" type="button"
 							styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
 						<p:commandButton value="No" type="button"
 							styleClass="ui-confirmdialog-no" icon="pi pi-times" />
 					</p:confirmDialog>
-					
+
 				</p:column>
 
 			</p:dataTable>

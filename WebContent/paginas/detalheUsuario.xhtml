@@ -1,0 +1,76 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet library="css" name="file.css" />
+	<h:outputStylesheet name="primeicons/primeicons.css"
+		library="primefaces" />
+</h:head>
+<h:body>
+	<h:form>
+
+
+
+		<p:dialog header="Projeto Sefaz" modal="true" visible="true">
+
+
+
+			<p:panelGrid id="gridCampos" style="width: 90%">
+				<p:row>
+					<p:column headerText="Nome">
+						<h:outputText value="#{UsuarioBean.usuario.nome}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column headerText="Email">
+						<h:outputText value="#{UsuarioBean.usuario.email}" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+
+			<p:panel style="margin-bottom:10px; width: 90%">
+				<p:dataTable id="telefone" var="telefones"
+					value="#{UsuarioBean.usuario.telefones}">
+
+					<p:column headerText="DDD">
+						<h:outputText value="#{telefone.ddd}" />
+					</p:column>
+					<p:column headerText="Número">
+						<h:outputText value="#{telefone.numero}" />
+					</p:column>
+					<p:column headerText="Tipo">
+						<h:outputText value="#{telefone.tipo}" />
+					</p:column>
+					
+					<p:column headerText="Remover" width="10%"
+						style="text-align: center">
+						<p:commandButton icon="pi pi-times" update="@form"
+							action="#{UsuarioBean.removerTelefone}">
+							<f:setPropertyActionListener
+								target="#{UsuarioBean.telefoneSelecionado}"
+								value="#{usuario.telefone}" />
+							<p:confirm header="Confirmation" message="Deseja Remover?"
+								icon="pi pi-exclamation-triangle" />
+						</p:commandButton>
+
+						<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+							<p:commandButton value="Yes" type="button"
+								styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+							<p:commandButton value="No" type="button"
+								styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+						</p:confirmDialog>
+
+					</p:column>
+
+				</p:dataTable>
+				
+				<p:commandButton value="Voltar" update="@form" style="text-align: center" icon="pi pi-arrow-left"
+						actionListener="#{UsuarioBean.abrirPesquisarUsuario}"/>
+			</p:panel>
+			
+		</p:dialog>
+	</h:form>
+</h:body>
+</html>

@@ -2,6 +2,7 @@ package entidade;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,7 +30,7 @@ public class Telefone {
 	@Column(name = "tipo")
 	private String tipo;
 
-	@ManyToOne
+	@ManyToOne (fetch = FetchType.LAZY)
 	@JoinColumn(name = "email_usuario", referencedColumnName = "email", nullable = false)
 	private Usuario usuario;
 

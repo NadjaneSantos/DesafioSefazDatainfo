@@ -29,12 +29,15 @@ public class UsuarioBean {
 	private Telefone telefone;
 	private List<Usuario> listaUsuario;
 	private String emailSelecionado;
+	private long telefoneSelecionado;
+	private String usuarioInpt;
 
 	private UsuarioDAO usuarioDAO;
 
 	private static final String MANTER = "manterUsuario.xhtml";
 	private static final String PESQUISAR = "pesquisarUsuario.xhtml";
 	private static final String LOGIN = "login.xhtml";
+	private static final String DETALHE = "detalheUsuario.xhtml";
 
 	public UsuarioBean() {
 
@@ -58,25 +61,27 @@ public class UsuarioBean {
 		this.listaUsuario = this.usuarioDAO.listarTodos();
 
 	}
-
+	
+	// Método CriarUsuario: Grava um novo usuario no banco.
+	
 	public void criarUsuario() throws IOException {
 
-		if (this.usuarioDAO.gravar(this.usuario)) {
+			if (this.usuarioDAO.gravar(this.usuario)) {
 
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Usuário cadastrado com sucesso."));
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Usuário cadastrado com sucesso."));
 
-			abrirLogin();
-
+				abrirLogin();
+					
 		} else {
-
+			
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "Erro ao inserir."));
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Erro ao inserir"));
 		}
 
 	}
 
-	// Método salvar: Inseri um usuário.
+	// Método salvar: Inseri um usuário ou altera se já existir.
 
 	public void salvar() throws IOException {
 
@@ -172,14 +177,28 @@ public class UsuarioBean {
 	// Método remover: Deleta um usuário.
 
 	public String remover() {
-
 		Usuario usuarioRemocao = this.usuarioDAO.pesquisar(emailSelecionado);
 		this.usuarioDAO.remover(usuarioRemocao);
 		this.listaUsuario = this.usuarioDAO.listarTodos();
-		
-		addMessage("System Error", "Please try again later.");
-
 		return "";
+	}
+	
+	public void detalheUsuario() throws IOException {
+		
+		Usuario usuarioDetalhe = this.usuarioDAO.pesquisar(emailSelecionado);
+		this.usuario = usuarioDetalhe;
+		
+		FacesContext.getCurrentInstance().getExternalContext().redirect(DETALHE);
+	}
+	
+	public String removerTelefone() {
+				
+		this.usuarioDAO.removerTelefone(this.telefoneSelecionado);
+		
+	//	this.usuario = this.usuarioDAO.pesquisar(emailUsuarioSelecionado);
+		
+		return "";
+		
 	}
 	
 	public void addMessage(String summary, String detail) {
@@ -237,5 +256,22 @@ public class UsuarioBean {
 	public void setUsuarioDAO(UsuarioDAO usuarioDAO) {
 		this.usuarioDAO = usuarioDAO;
 	}
+
+	public long getTelefoneSelecionado() {
+		return telefoneSelecionado;
+	}
+
+	public void setTelefoneSelecionado(long telefoneSelecionado) {
+		this.telefoneSelecionado = telefoneSelecionado;
+	}
+
+	public String getUsuarioInpt() {
+		return usuarioInpt;
+	}
+
+	public void setUsuarioInpt(String usuarioInpt) {
+		this.usuarioInpt = usuarioInpt;
+	}
+	
 
 }

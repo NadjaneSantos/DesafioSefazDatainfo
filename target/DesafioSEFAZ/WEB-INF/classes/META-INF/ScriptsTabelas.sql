@@ -1,4 +1,4 @@
--- Scripts para criação do projeto --
+-- Scripts para criação das tabelas usuario e telefone --
 
 CREATE TABLE usuario (
    email VARCHAR(100) NOT NULL,
@@ -8,16 +8,13 @@ CREATE TABLE usuario (
 );
 
 CREATE TABLE telefone (
-   id INT NOT NULL,
+   id INTEGER IDENTITY PRIMARY KEY,
    ddd INT NOT NULL,
    numero VARCHAR(100) NOT NULL,
    tipo VARCHAR(100) NOT NULL,
    email_usuario VARCHAR(100) NOT NULL
 );
 
-ALTER TABLE TELEFONE
-ADD FOREIGN KEY (EMAIL_USUARIO) 
-REFERENCES USUARIO(EMAIL);
-
-CREATE SEQUENCE S_TELEFONE 
-	MINVALUE 1 MAXVALUE 999999 INCREMENT BY 1 START WITH 1 ;
+ALTER TABLE telefone
+ADD FOREIGN KEY (email_usuario) 
+REFERENCES usuario(email);

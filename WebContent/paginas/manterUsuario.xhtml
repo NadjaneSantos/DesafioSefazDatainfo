@@ -4,6 +4,9 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+	<h:outputStylesheet library="css" name="file.css" />
+	<h:outputStylesheet name="primeicons/primeicons.css"
+		library="primefaces" />
 </h:head>
 
 <h:body>
@@ -78,9 +81,13 @@
 						<p:commandButton value="Limpar" update="@form" process="@this"
 							actionListener="#{UsuarioBean.limpar}" />
 					</p:column>
+					<p:column>
+						<p:commandButton value="Voltar" update="@form"
+							actionListener="#{UsuarioBean.abrirPesquisarUsuario}" />
+					</p:column>
 				</p:row>
 			</p:panelGrid>
-			</p:panel>
+		</p:panel>
 	</h:form>
 </h:body>
 </html>
