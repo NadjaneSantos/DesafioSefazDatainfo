@@ -47,7 +47,7 @@ public class UsuarioTest{
 	    entityManager.persist(usuario);
 
 	    List<Usuario> dbUsuarios = (List<Usuario>) entityManager.createQuery("select u " + "from Usuario u", Usuario.class).getResultList();
-	    assertEquals(usuario.getNome(), ((Usuario) dbUsuarios).getNome());
+	    assertEquals(usuario.getNome(), ((List<Usuario>) dbUsuarios).get(0).getNome());
 	    
 	    
 
